@@ -22,7 +22,7 @@ class Solution:
         seen = {}
         for i in range(len(nums)):
             if nums[i] not in seen:
-                seen[nums[i]] = seen.get(nums[i], 0) + i
+                seen[nums[i]] = i
             else:
                 if abs(i - seen[nums[i]]) <= k:
                     return True
