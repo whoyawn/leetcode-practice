@@ -75,16 +75,17 @@ class Solution {
         sub.forEach { 
             need[$0, default: 0] += 1
         }
-        let needCount = need.values.reduce(0, { $0 + $1 })
+        let needCount = need.count
         let count = s.count
         while j < count {
             let c = arr[j]
             have[c, default: 0] += 1
-            if need[c] != nil && have[c]! <= need[c]! {
+            // Is there enough characters to match need?
+            if need[c] != nil && have[c]! == need[c]! {
                 haveCount += 1
             }
             j += 1
-            // valid window
+            // valid window, enough counts
             while haveCount == needCount {
                 let size = j - i
                 if size < minSoFar.len {
