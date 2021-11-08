@@ -23,28 +23,24 @@ time: O(m + n), space: O(n)
 """
 class Solution {
     func nextGreaterElement(_ nums1: [Int], _ nums2: [Int]) -> [Int] {
-        var nums2IndexMap: [Int:Int] = [:] // key: ele, val: index
-        for (i, num) in nums2.enumerated() {
-            nums2IndexMap[num] = i
-        }
-        var ngeStack: [(val: Int, i: Int)] = [(nums2[0], 0)]
-        var nextGreaterElementMap: [Int] = Array(repeating: 0, count: nums2.count)
-        for i in 1..<nums2.count {
-            let num = nums2[i]
-            while !ngeStack.isEmpty && ngeStack.last!.val < num {
+        // key: ele, value, nge
+        var nums2NgeMap: [Int:Int] = [:]
+        var ngeStack: [Int] = []
+        for num in nums2 {
+            while !ngeStack.isEmpty && ngeStack.last! < num {
                 let popped = ngeStack.removeLast()
-                nextGreaterElementMap[popped.i] = num
+                nums2NgeMap[popped] = num
             }
-            ngeStack.append((num, i))
+            ngeStack.append(num)
         }
         while !ngeStack.isEmpty {
-            let i = ngeStack.removeLast().i
-            nextGreaterElementMap[i] = -1
+            let e = ngeStack.removeLast()
+            nums2NgeMap[e] = -1
         }
         var nextGreaterElements: [Int] = []
         for num in nums1 {
-            let i = nums2IndexMap[num]!
-            nextGreaterElements.append(nextGreaterElementMap[i])
+            let nge = nums2NgeMap[num]!
+            nextGreaterElements.append(nge)
         }
         return nextGreaterElements
     }
