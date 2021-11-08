@@ -1,65 +1,67 @@
 """
-all of them need to add to 0
-requirements -> 2 positives 1 negative or 1 positive 2 negatives or 1 pos 1 neg 1 0 or 3 zeroes
-must use separate indices
+find all 3 distinct indices where they add to 0
 
 nums[i] + nums[j] + nums[k] == 0
 
 nums[i] + nums[j] = -nums[k]
 
+nums[k] = -nums[i] - nums[j]
 
+brute force -> O(n^3)
 
-index doesn't matter
+O(n^2)
 
-can have multiple answers
+if you're finding k 
+-> look up k with a hash map.. O(1) time, O(n) space
+-> binary search O(log n), O(n) space
 
-brute force:
- loop thorugh all combinations and try adding them to 0
+O(1) space, O(1)
+                        k
+                           i      j
+[-1,0,1,2,-1,-4] -> [-2,-1,-1,0,0,1,2,4]
+[[-1,-1,2],[-1,0,1]
 
-ans = []
-for i in n
-  for j in i+1..< n
-    for k in j+1..< n
-        if i + j + k == 0:
-            return [i, j, k]
+t = 1
+[-2,0,2][-1,-1,2] [-1,0,1]
 
-O(n^3)
+if j + i = -k, then answer
 
+[-2,-1,-1,0,0,1,2,4]
+[]
+[1]
+[2]
+[2,2]
+[1,2,3]
+[-1,0,1]
+[0,0,0]
+[0,0,0,0]
 
+[-2,0,1,1,2]
+[-2,0,2] [-2,1,1]
 
-O(n^2) time, O(n) space
-
-1. put all values in dict
-2. loop through i and j, make sure youre not using i and j in the dict
-3. find k
+time: O(n^2)
+space: O(1)
 """
 
 class Solution {
     func threeSum(_ nums: [Int]) -> [[Int]] {
-        var ans: [[Int]] = []
-        var dict: [Int: Int] = [:]
-        for n in nums {
-            dict[n, default: 0] += 1
-        }
-        for i in 0..<nums.count {
-            for j in i + 1..<nums.count {
-                dict[nums[i]]! -= 1
-                dict[nums[j]]! -= 1
-                if dict[nums[i]] == 0 {
-                    dict.removeValue(forKey: nums[i])
+        var triplets = Set<[Int]>()
+        let nums = nums.sorted()
+        for ki in (0..<nums.count) {
+            let k = nums[ki]
+            var (i, j) = (ki + 1, nums.count - 1)
+            while i < j {
+                if nums[i] + nums[j] == -k {
+                    triplets.insert([k, nums[i], nums[j]])
+                    i += 1
+                    j -= 1
+                } else if nums[i] + nums[j] > -k {
+                    j -= 1
+                } else {
+                    i += 1
                 }
-                if dict[nums[j]] == 0 {
-                    dict.removeValue(forKey: nums[j])
-                }
-
-                let k = (nums[i] + nums[j]) * -1
-                if dict[k] != nil {
-                    ans.append([nums[i], nums[j], k].sorted(by: <))
-                }
-                dict[nums[i], default: 0] += 1
-                dict[nums[j], default: 0] += 1
             }
         }
-        return Array(Set(ans))
+        return Array(triplets)
     }
 }
