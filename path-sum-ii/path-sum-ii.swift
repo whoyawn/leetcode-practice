@@ -14,29 +14,37 @@
  * }
  */
 """
+paths = []
+when hit leaf, check target sum == cur sum, cur path add to paths
+leaf: left and right == nil -> base case
+store:
+cur path
+cur sum / cur diff
 
-because you do it iteratively, there is a problem when you might pop off something on the stack that's
-still part of the path
-
-store a sum and a path at each node of the list
+time: O(n) where n is nodes of tree
+space: O(n^2)
 """
 class Solution {
+    // RECURSIVE
     func pathSum(_ root: TreeNode?, _ targetSum: Int) -> [[Int]] {
         var paths: [[Int]] = []
-        findPath(root, [], &paths, targetSum)
+        var curPath: [Int] = []
+        traverse(root, curPath, targetSum, &paths)
         return paths
     }
-    
-    func findPath(_ root: TreeNode?, _ path: [Int], _ paths: inout [[Int]], _ targetSum: Int) {
+
+    func traverse(_ root: TreeNode?, _ curPath: [Int], _ targetSum: Int, _ paths: inout [[Int]]) {
         guard let root = root else { return }
-        var path = path + [root.val]
-        if root.left == nil && root.right == nil && targetSum - root.val == 0 {
-            paths.append(path)
-            return
+        let newPath = curPath + [root.val]
+        let newSum = targetSum - root.val
+        traverse(root.left, newPath, newSum, &paths)
+        if root.left == nil && root.right == nil && newSum == 0 {
+            paths.append(newPath)
         }
-        findPath(root.left, path, &paths, targetSum - root.val)
-        findPath(root.right, path, &paths, targetSum - root.val)
+        traverse(root.right, newPath, newSum, &paths)
     }
+    
+    // ITERATIVE
     // func pathSum(_ root: TreeNode?, _ targetSum: Int) -> [[Int]] {
     //     var stack: [(TreeNode, [Int], Int)] = []
     //     var paths: [[Int]] = []
