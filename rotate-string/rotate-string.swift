@@ -1,37 +1,22 @@
 """
-shift left vs shift right?
+same relative order
 
-shifts = n
+a bcde -> bcde a
 
-abcd
+ab cde -> cde ab .. cde .. ab .. cde .. ab
 
- bcdabcda
+ab cdeab cde
 
-cdab .... s = abcd, goal = cdab
+abcdeabcde
 
-dabc
+abcdeabcde
 
-abcd
-
-abcdabcd
-  cdabcdab
-
-
-no matter how many times you shift, you'll still have a partial substring match to the original
-
-brute force: rotate n times until you have a match string -> O(n^2)
-
-s = "abcde", goal = "abced"
-
-abcedabced
-
-bcedabceda
-
-s = "aa" goal = "a"
+a a
 """
 
 class Solution {
     func rotateString(_ s: String, _ goal: String) -> Bool {
-        return (goal + goal).contains(s) && goal.count == s.count
+        guard s.count == goal.count else { return false }
+        return (s+s).contains(goal)
     }
 }
