@@ -5,7 +5,7 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 
 ## Topological sort
 
-```
+```swift
 // Problems that use top sort: course schedule i/ii
 // https://www.interviewcake.com/concept/swift/topological-sort
     func topologicalSort(_ vertices: Int, _ edgeList: [[Int]]) -> [Int]? {
@@ -60,7 +60,7 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 
 ## Disjoint Set and Union Find
 
-```
+```swift
 /// Maintain a parent array where parent[i] is the parent node i in the forest
 ///
 /// Roots have themselves as parent. That's hwo we know we reached the root
@@ -132,7 +132,7 @@ set.find(7)
 
 ## Heap
 
-```
+```swift
 // problems that use heaps: k closest elements
 // heap implementation. heaps are a complete binary tree so all the levels are filled except for the bottom right
 // finding the min -> O(1)
