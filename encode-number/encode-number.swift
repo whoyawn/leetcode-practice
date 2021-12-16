@@ -19,9 +19,12 @@ xxx 2^3
 7 = 111  11
 """
 class Solution {
+    // func encode(_ num: Int) -> String {
+    //     var s = String(num + 1, radix: 2)
+    //     s.removeFirst()
+    //     return s
+    // }
     func encode(_ num: Int) -> String {
-        var s = String(num + 1, radix: 2)
-        s.removeFirst()
-        return s
+        return num > 0 ? encode((num - 1) / 2) + ["1", "0"][num % 2] : ""
     }
 }
