@@ -383,7 +383,7 @@ Key concepts:
 - Implementation-wise, we need to manage global state
 - Algorithm design: modeling the search space and pruning
 
-```
+swift```
 func balancedString(s) {
 
     func backtracking() {
@@ -393,4 +393,16 @@ func balancedString(s) {
         state.removeLast() // undo transformation
     }
 }
+
+func matrix() {
+    curHead = head
+    
+    head = neighbor
+    visited[neighbor.0][neighbor.1]
+    numVisited += 1
+    
+    backtracking()
+    
+    head = curHead
+    numVisited -= 1
 ```
