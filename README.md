@@ -383,7 +383,7 @@ Key concepts:
 - Implementation-wise, we need to manage global state
 - Algorithm design: modeling the search space and pruning
 
-swift```
+```swift
 func balancedString(s) {
 
     func backtracking() {
