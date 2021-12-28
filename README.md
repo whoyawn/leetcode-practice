@@ -375,3 +375,22 @@ print(heap.remove(at: 0))
 print(heap.elements)
 
 ```
+
+## Backtracking
+
+Key concepts:
+- Conceptually is a DFS
+- Implementation-wise, we need to manage global state
+- Algorithm design: modeling the search space and pruning
+
+```
+func balancedString(s) {
+
+    func backtracking() {
+        ...
+        state.append() // transform global state to child state
+        backtracking()
+        state.removeLast() // undo transformation
+    }
+}
+```
