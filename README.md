@@ -398,11 +398,13 @@ func matrix() {
     curHead = head
     
     head = neighbor
-    visited[neighbor.0][neighbor.1]
+    visited[neighbor.0][neighbor.1] = true
     numVisited += 1
     
     backtracking()
     
     head = curHead
+    visited[neighbor.0][neighbor.1] = false
     numVisited -= 1
+}
 ```
