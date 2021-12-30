@@ -1,3 +1,4 @@
+[Discussion Post (created on 29/11/2021 at 23:14)](https://leetcode.com/problems/longest-consecutive-sequence/discuss/1656138/Why-does-my-Union-Find-implementation-get-TLE)  
 <h2>128. Longest Consecutive Sequence</h2><h3>Medium</h3><hr><div><p>Given an unsorted array of integers <code>nums</code>, return <em>the length of the longest consecutive elements sequence.</em></p>
 
 <p>You must write an algorithm that runs in&nbsp;<code>O(n)</code>&nbsp;time.</p>
