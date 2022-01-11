@@ -13,6 +13,7 @@ class Solution {
         func backtracking() {
             if state.count == nums.count {
                 permutations.append(state)
+                return
             }
             for num in nums where !state.contains(num) {
                 state.append(num)
