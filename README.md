@@ -378,6 +378,12 @@ print(heap.elements)
 
 ## Backtracking
 
+### Search Space
+A tree of partial solutions to a problem
+- Root is the starting position
+- The leaves are complete solutions
+- The children of each node are the different ways to extend the partial solution
+
 Key concepts:
 - Conceptually is a DFS
 - Implementation-wise, we need to manage global state
