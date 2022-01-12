@@ -21,7 +21,7 @@ class Solution {
         }
 
         func createTree(_ ps: Int, _ pe: Int, _ ins: Int, _ ine: Int) -> TreeNode? {
-            if ps > pe || ins > ine { return nil }
+            if ps > pe { return nil }
                 let preorderVal = preorder[ps]
                 guard let inorderIndex = inorderDict[preorderVal] else { return nil }
                 let root = TreeNode(preorderVal)
