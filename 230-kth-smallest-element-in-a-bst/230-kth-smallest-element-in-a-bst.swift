@@ -18,7 +18,7 @@ class Solution {
         var kth = -1
         var call = k
         func helper(_ root: TreeNode?) {
-            guard let root = root else { return }
+            guard let root = root, kth < 0 else { return }
             helper(root.left)
             call -= 1
             if call == 0 { 
