@@ -58,8 +58,10 @@ class Solution {
         var localMin = 1
         for num in nums {
             let products = [localMax * num, localMin * num, num]
-            localMax = products.max()!
-            localMin = products.min()!
+            guard let potentialMax = products.max(),
+                 let potentialMin = products.min() else { return -1 }
+            localMax = potentialMax
+            localMin = potentialMin
             
             globalMax = max(globalMax, localMax)
         }
