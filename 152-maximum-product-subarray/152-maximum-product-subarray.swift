@@ -47,6 +47,7 @@ ans = 6
 [-1,2,3,4] -> [2,3,4]
 [2,-1] -> [2]
 [1,2,3,4]
+[2,3,-2,4,-2]
 
 """
 class Solution {
@@ -56,10 +57,9 @@ class Solution {
         var localMax = 1
         var localMin = 1
         for num in nums {
-            let newMaxIfPositive = localMax * num
-            let newMinIfNegative = localMin * num
-            localMax = max(newMaxIfPositive, newMinIfNegative, num)
-            localMin = min(newMaxIfPositive, newMinIfNegative, num)
+            let products = [localMax * num, localMin * num, num]
+            localMax = products.max()!
+            localMin = products.min()!
             
             globalMax = max(globalMax, localMax)
         }
