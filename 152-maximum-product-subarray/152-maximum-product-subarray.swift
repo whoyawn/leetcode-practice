@@ -8,17 +8,18 @@ class Solution {
         guard !nums.isEmpty else { return -1 }
         var (pre, suf) = (1, 1)
         var largestProduct = nums[0]
-        for (front, back) in zip(nums, nums.reversed()) {
-            largestProduct = max(largestProduct, pre * front, suf * back)
-            if front == 0 {
+        for num in nums {
+            largestProduct = max(largestProduct, pre * num)
+            pre *= num
+            if num == 0 {
                 pre = 1
-            } else {
-                pre *= front
             }
-            if back == 0 {
+        }
+        for num in nums.reversed() {
+            largestProduct = max(largestProduct, suf * num)
+            suf *= num
+            if num == 0 {
                 suf = 1
-            } else {
-                suf *= back
             }
         }
         return largestProduct
