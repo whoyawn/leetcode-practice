@@ -7,9 +7,11 @@ A, k = 0 -> 1
 
 ABABBAC, k = 1 -> 4
 
-AB
+ABA
 
-{A} k = 1, maj = A
+{A: 2, B; 1} k = 1, maj count = 2, leftover: 1
+
+Look for non majorit;
 
 ABC, k = 2
 
@@ -32,22 +34,23 @@ class Solution {
         var arr = Array(s)
         var longest = 0
         for char in chars {
-            // var dict: [Character: Int] = [:]
             var l = 0
+            var r = 0
             var diffs = 0
-            for r in 0..<arr.count {
+            while r < arr.count {
                 let cur = arr[r]
-                if cur != char {
-                    diffs += 1
-                }
-                while diffs > k {
+                if cur != char && diffs == k {
                     if arr[l] != char {
                         diffs -= 1
                     }
                     l += 1
+                } else {
+                    if cur != char {
+                        diffs += 1
+                    }
+                    longest = max(longest, r - l + 1)
+                    r += 1
                 }
-                
-                longest = max(longest, r - l + 1)
             }
         }
         return longest
