@@ -1,58 +1,53 @@
 """
-AABBBCD, k = 1
+need: longest substring
+valid edits: k
 
-ABBA, k = 1 -> 3
+constraints: uppercase letters (26)
 
-A, k = 0 -> 1
+sliding window: valid = k = remainingReplacements >= 0
+replace -> replace non majority
 
-ABABBAC, k = 1 -> 4
+ABBAAAC?
+{A: 4, B: 2} if any non majority replaced, replacements - 1
 
-ABA
+AABBA
+{A: 2, B: 2} replace any, replacements - 1 maj -> A, B
 
-{A: 2, B; 1} k = 1, maj count = 2, leftover: 1
+{A: 3, B: 2} maj -> A
 
-Look for non majorit;
+k edits = total window count - majority count
 
-ABC, k = 2
-
-count of diff chars <= k
-
-valid window -> same character with k diff
-A: 1, k = 1
-A: 2, k = 1
-{A: 2, B: 1}, k = 0, maj = A
-{A: 1, B: 1}, k = 0, maj = A
-{B: 1}, k = 0, maj = B
-
-"AABABBA"
-1
+can you extend window? if not majority && replacements == 0 (not in dict)
+add in, then check if still have valid edits 
 
 """
 class Solution {
     func characterReplacement(_ s: String, _ k: Int) -> Int {
-        var chars: [Character] = Array("ABCDEFGHIJKLMNOPQRSTUVWXYZ")
+        var (l, r) = (0, 0)
+        var longestLength = 0
         var arr = Array(s)
-        var longest = 0
-        for char in chars {
-            var l = 0
-            var r = 0
-            var diffs = 0
-            while r < arr.count {
-                let cur = arr[r]
-                if cur != char && diffs == k {
-                    if arr[l] != char {
-                        diffs -= 1
-                    }
-                    l += 1
-                } else {
-                    if cur != char {
-                        diffs += 1
-                    }
-                    longest = max(longest, r - l + 1)
-                    r += 1
-                }
+        var elements: [Character: Int] = [:]
+        func windowIsExtendable() -> Bool {
+            elements[arr[r], default: 0] += 1
+            let windowCount = r - l + 1
+            let majorityCount = elements.values.max() ?? 0
+            let validWindow = windowCount - majorityCount <= k
+            if !validWindow {
+                elements[arr[r], default: 0] -= 1
+                return false
+            }
+            return validWindow
+        }
+        let N = s.count
+        while r < N {
+            if windowIsExtendable() {
+                longestLength = max(longestLength, r - l + 1)
+                r += 1
+            } else {
+                elements[arr[l], default: 0] -= 1
+                l += 1
             }
         }
-        return longest
+        return longestLength
     }
 }
