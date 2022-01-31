@@ -1,3 +1,4 @@
+[Discussion Post (created on 31/0/2022 at 13:53)](https://leetcode.com/problems/reverse-linked-list/discuss/1735194/Swift-Post-Order)  
 <h2>206. Reverse Linked List</h2><h3>Easy</h3><hr><div><p>Given the <code>head</code> of a singly linked list, reverse the list, and return <em>the reversed list</em>.</p>
 
 <p>&nbsp;</p>
