@@ -19,7 +19,7 @@ O(n + klogn)
 """
 class Solution {
     func findClosestElements(_ arr: [Int], _ k: Int, _ x: Int) -> [Int] {
-        var heap = arr.sorted(by: { abs($0 - x) < abs($1 - x) || (abs($0 - x) == abs($1 - x) && $0 < $1) }) // O(n) for real heapify
+        var heap = arr.sorted(by: { abs($0 - x) < abs($1 - x) }) // O(n) for real heapify
         return Array(heap[0..<k]).sorted()
     }
 }
