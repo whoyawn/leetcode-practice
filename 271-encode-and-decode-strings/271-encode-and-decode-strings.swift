@@ -1,18 +1,24 @@
 """
+["Hello","World"]
 
-[hello, world]
+"He##llo!#!Wor##!##!ld!!"
 
-hello, world
-"@"
+1. modify escaping chars
+2. add delimiter (certain seq of chars)
 
+O(n*m)
 """
 class Codec {
     func encode(_ strs: [String]) -> String {
-        strs.joined(separator: "¡")
+        strs
+        .map { $0.replacingOccurrences(of: "#", with: "##") }
+        .joined(separator: "!#!")
     }
     
     func decode(_ s: String) -> [String] {
-        s.components(separatedBy: "¡")
+        return s
+        .components(separatedBy: "!#!")
+        .map { $0.replacingOccurrences(of: "##", with: "#") }
     }
 }
 
