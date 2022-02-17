@@ -39,7 +39,7 @@ class Codec {
         var decoded: [String] = []
         var i = 0
         var number = 0
-        while i < chars.count {
+        while i < chars.endIndex {
             if chars[i] != "#" {
                 let digit = chars[i].wholeNumberValue!
                 if digit == 0 {
