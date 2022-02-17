@@ -38,22 +38,21 @@ class Codec {
         var chars = Array(s)
         var decoded: [String] = []
         var i = 0
-        var number = 0
+        
         while i < chars.endIndex {
-            if chars[i] != "#" {
-                let digit = chars[i].wholeNumberValue!
+            var number = 0
+            if let digit = chars[i].wholeNumberValue {
                 if digit == 0 {
                     decoded.append("")
                     i += 2
                 } else {
-                    while chars[i] != "#" {
+                    while let d = chars[i].wholeNumberValue {
                         number *= 10
-                        number += chars[i].wholeNumberValue!
+                        number += d
                         i += 1
                     }
                     decoded.append(String(chars[i+1..<i+1+number]))
                     i += number + 1
-                    number = 0
                 }
             }
         }
