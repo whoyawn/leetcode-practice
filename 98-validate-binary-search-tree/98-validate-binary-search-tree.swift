@@ -20,15 +20,15 @@ check prev as your go, if cur <= prev then false, else true
 class Solution {
     func isValidBST(_ root: TreeNode?) -> Bool {
         var isValid = true
-        var inorder: [Int] = []
+        var prev: TreeNode?
         func dfs(_ root: TreeNode?) {
             guard let root = root else { return }
             dfs(root.left)
-            if root.val <= inorder.last ?? Int.min { 
+            if root.val <= prev?.val ?? Int.min { 
                 isValid = false
                 return
             }
-            inorder.append(root.val)
+            prev = root
             dfs(root.right)
         }
         dfs(root)
