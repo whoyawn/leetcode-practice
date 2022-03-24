@@ -36,13 +36,13 @@ class Solution {
         }
         var sortedOrder: [Int] = []
         
-        var queue: [Int] = []
+        var queue: [Int] = indegrees.enumerated().filter({ $0.1 == 0 }).map({ $0.0 })
         
-        for i in 0..<indegrees.count {
-            if indegrees[i] == 0 {
-                queue.append(i)
-            }
-        }
+        // for i in 0..<indegrees.count {
+        //     if indegrees[i] == 0 {
+        //         queue.append(i)
+        //     }
+        // }
         
         while let front = queue.first {
             queue.removeFirst()
